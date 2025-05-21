@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "263425610681",
+    "project_id": "daham-moap",
+    "storage_bucket": "daham-moap.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263425610681:android:74fae85af9cc02f1c45c68",
+        "android_client_info": {
+          "package_name": "com.example.daham"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAunCn0MKjmNrLZzbHuOizv-ys18JiHg9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
