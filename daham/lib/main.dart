@@ -1,5 +1,6 @@
-import 'package:daham/Appstate/appsate.dart';
+import 'package:daham/Appstate/appstate.dart';
 import 'package:daham/Pages/Login/login.dart';
+import 'package:daham/Provider/group_provider.dart';
 import 'package:daham/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,9 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const RootApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => GroupProvider())],
+      child: const RootApp(),
+    ),
+  );
 }
 
+// 처음 앱 시작 시 Firebase 초기화 후 Daham 앱을 실행
 class RootApp extends StatelessWidget {
   const RootApp({super.key});
 
