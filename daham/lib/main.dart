@@ -1,10 +1,9 @@
 import 'package:daham/Appstate/appstate.dart';
-import 'package:daham/Pages/Group/group_list.dart';
+import 'package:daham/Pages/Group/group_list_page.dart';
 import 'package:daham/Pages/Login/login.dart';
 import 'package:daham/Pages/test/home_page.dart';
 import 'package:daham/Provider/group_provider.dart';
 import 'package:daham/firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +53,7 @@ class Daham extends StatelessWidget {
           routes: {
             '/sign': (context) => Login(),
             '/': (context) => HomePage(),
-            '/group': (context) => GroupPage(),
+            '/group': (context) => GroupListPage(),
           },
         );
       },

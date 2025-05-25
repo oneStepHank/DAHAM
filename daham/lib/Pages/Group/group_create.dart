@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:daham/Data/group.dart';
-import 'package:daham/provider/group_provider.dart';
+import 'package:daham/Provider/group_provider.dart';
 import 'package:uuid/uuid.dart';
 
 class GroupCreatePage extends StatefulWidget {
+  const GroupCreatePage({super.key});
+
   @override
-  _GroupCreatePageState createState() => _GroupCreatePageState();
+  State<GroupCreatePage> createState() => _GroupCreatePageState();
 }
 
 class _GroupCreatePageState extends State<GroupCreatePage> {
@@ -17,24 +19,24 @@ class _GroupCreatePageState extends State<GroupCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('그룹 만들기')),
+      appBar: AppBar(title: const Text('그룹 만들기')),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(labelText: '그룹 이름'),
+              decoration: const InputDecoration(labelText: '그룹 이름'),
             ),
             TextField(
               controller: _descController,
-              decoration: InputDecoration(labelText: '그룹 설명'),
+              decoration: const InputDecoration(labelText: '그룹 설명'),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Row(
               children: [
-                Text('최대 인원:'),
-                SizedBox(width: 10),
+                const Text('최대 인원:'),
+                const SizedBox(width: 10),
                 DropdownButton<int>(
                   value: _maxMembers,
                   onChanged: (value) => setState(() => _maxMembers = value!),
@@ -48,22 +50,25 @@ class _GroupCreatePageState extends State<GroupCreatePage> {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 final newGroup = Group(
-                  id: Uuid().v4(),
+                  id: const Uuid().v4(),
                   title: _titleController.text,
                   description: _descController.text,
                   maxMembers: _maxMembers,
                   members: [],
                 );
+
                 Provider.of<GroupProvider>(
                   context,
                   listen: false,
                 ).createGroup(newGroup);
-                Navigator.pop(context);
+
+                Navigator.pop(context); // 생성 후 뒤로 이동
               },
-              child: Text('생성'),
+              child: const Text('생성'),
             ),
           ],
         ),
