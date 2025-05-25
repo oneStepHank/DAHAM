@@ -1,5 +1,6 @@
 import 'package:daham/Appstate/appstate.dart';
 import 'package:daham/Pages/Login/login.dart';
+import 'package:daham/Pages/test/home_page.dart';
 import 'package:daham/Provider/group_provider.dart';
 import 'package:daham/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,7 +11,10 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => GroupProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppState()),
+        ChangeNotifierProvider(create: (_) => GroupProvider()),
+      ],
       child: const RootApp(),
     ),
   );
@@ -42,19 +46,13 @@ class Daham extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppState(),
-      child: Consumer<AppState>(
-        builder: (context, state, _) {
-          return MaterialApp(
-            initialRoute: state.login ? '/' : '/sign',
-            routes: {
-              '/sign': (context) => Login(),
-              '/': (context) => Center(child: Text('Hello World!')),
-            },
-          );
-        },
-      ),
+    return Consumer<AppState>(
+      builder: (context, state, _) {
+        return MaterialApp(
+          initialRoute: state.login == null ? '/sign' : '/',
+          routes: {'/sign': (context) => Login(), '/': (context) => HomePage()},
+        );
+      },
     );
   }
 }
