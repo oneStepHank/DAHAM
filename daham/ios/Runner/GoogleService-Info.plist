@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>263425610681-kvbbelg11871gj8pcfq7ji6o069p330s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.263425610681-kvbbelg11871gj8pcfq7ji6o069p330s</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>263425610681-0a2o7k5hk5ruf5ueflld5p84cailec3m.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyA7cbJc6Dgkik7GXLymM2as_nEv5bANG6Y</string>
 	<key>GCM_SENDER_ID</key>
@@ -26,5 +32,21 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:263425610681:ios:4c7d425c099b3524c45c68</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+	  <dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		  <string>com.googleusercontent.apps.263425610681-kvbbelg11871gj8pcfq7ji6o069p330s</string>
+		</array>
+	  </dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	  <string>google</string>
+	  <string>com.googleusercontent.apps.263425610681-kvbbelg11871gj8pcfq7ji6o069p330s</string>
+	</array>
 </dict>
 </plist>

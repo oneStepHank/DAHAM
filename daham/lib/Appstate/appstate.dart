@@ -6,8 +6,8 @@ class AppState extends ChangeNotifier {
     init();
   }
 
-  bool _login = false;
-  bool get login => _login;
+  bool? _login;
+  bool? get login => _login;
 
   User? _user;
   User? get user => _user;

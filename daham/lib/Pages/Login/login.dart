@@ -14,7 +14,7 @@ class _LoginState extends State<Login> {
   Future<void> _signInGoogle(BuildContext context) async {
     try {
       final googleSignIn = GoogleSignIn();
-      await googleSignIn.signOut(); // 로그인때마다 계정 선택하기
+      // await googleSignIn.signOut(); // 로그인때마다 계정 선택하기
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
@@ -26,7 +26,8 @@ class _LoginState extends State<Login> {
       );
 
       await FirebaseAuth.instance.signInWithCredential(credential);
-      Navigator.of(context).popAndPushNamed('/');
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
     } catch (e) {}
   }
   //
