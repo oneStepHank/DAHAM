@@ -2,12 +2,15 @@ import 'package:daham/Appstate/appstate.dart';
 import 'package:daham/Pages/Group/group_list_page.dart';
 import 'package:daham/Pages/HomePage/main_page.dart';
 import 'package:daham/Pages/Login/login.dart';
+import 'package:daham/Pages/User/profile_setup.dart';
 import 'package:daham/Pages/test/home_page.dart';
 import 'package:daham/Provider/group_provider.dart';
 import 'package:daham/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 void main() {
   runApp(
@@ -50,8 +53,16 @@ class Daham extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, _) {
         return MaterialApp(
+          supportedLocales: [Locale('en'), Locale('ko')],
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            FormBuilderLocalizations.delegate,
+          ],
           home: state.login != true ? Login() : HomePage(),
           routes: {
+            '/profileSetting': (context) => ProfileSetup(),
             '/sign': (context) => Login(),
             // '/': (context) => HomePage(),
             '/group': (context) => GroupListPage(),
