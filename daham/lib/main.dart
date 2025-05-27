@@ -49,10 +49,10 @@ class Daham extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, _) {
         return MaterialApp(
-          initialRoute: state.login == null ? '/sign' : '/',
+          home: state.login != true ? Login() : HomePage(),
           routes: {
             '/sign': (context) => Login(),
-            '/': (context) => HomePage(),
+            // '/': (context) => HomePage(),
             '/group': (context) => GroupListPage(),
           },
         );

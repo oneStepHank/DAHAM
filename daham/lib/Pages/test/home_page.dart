@@ -18,7 +18,12 @@ class HomePage extends StatelessWidget {
             Text('HomePage'),
             Consumer<AppState>(
               builder: (context, value, _) {
-                return Text('Login : ${value.login}');
+                return Column(
+                  children: [
+                    TextButton(onPressed: value.signOut, child: Text('LogOut')),
+                    Text('Login : ${value.login}'),
+                  ],
+                );
               },
             ),
           ],
