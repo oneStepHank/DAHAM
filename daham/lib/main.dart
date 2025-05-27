@@ -1,5 +1,6 @@
 import 'package:daham/Appstate/appstate.dart';
 import 'package:daham/Pages/Group/group_list_page.dart';
+import 'package:daham/Pages/HomePage/main_page.dart';
 import 'package:daham/Pages/Login/login.dart';
 import 'package:daham/Pages/test/home_page.dart';
 import 'package:daham/Provider/group_provider.dart';
@@ -49,10 +50,10 @@ class Daham extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, _) {
         return MaterialApp(
-          initialRoute: state.login == null ? '/sign' : '/',
+          home: state.login != true ? Login() : HomePage(),
           routes: {
             '/sign': (context) => Login(),
-            '/': (context) => HomePage(),
+            // '/': (context) => HomePage(),
             '/group': (context) => GroupListPage(),
           },
         );
