@@ -17,10 +17,10 @@ class _LoginState extends State<Login> {
       // await googleSignIn.signOut(); // 로그인때마다 계정 선택하기
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      print('sign button press');
+      // print('sign button press');
       final GoogleSignInAuthentication googleAuth =
           await googleUser!.authentication;
-      print('token get');
+      // print('token get');
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
