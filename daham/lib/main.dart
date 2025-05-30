@@ -1,10 +1,11 @@
-import 'package:daham/Appstate/appstate.dart';
-import 'package:daham/Pages/Group/group_list_page.dart';
 import 'package:daham/Pages/HomePage/main_page.dart';
+import 'package:daham/Provider/appstate.dart';
+import 'package:daham/Pages/Group/group_list_page.dart';
 import 'package:daham/Pages/Login/login.dart';
 import 'package:daham/Pages/User/profile_setup.dart';
 import 'package:daham/Pages/test/home_page.dart';
 import 'package:daham/Provider/group_provider.dart';
+import 'package:daham/Provider/user_provider.dart';
 import 'package:daham/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
         ChangeNotifierProvider(create: (_) => GroupProvider()),
+        ChangeNotifierProvider(create: (_) => UserState()),
       ],
       child: const RootApp(),
     ),
@@ -45,8 +47,25 @@ class RootApp extends StatelessWidget {
   }
 }
 
-class Daham extends StatelessWidget {
+class Daham extends StatefulWidget {
   const Daham({super.key});
+
+  @override
+  State<Daham> createState() => _DahamState();
+}
+
+class _DahamState extends State<Daham> {
+  bool _initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (!_initialized) {
+      Provider.of<AppState>(context, listen: false).init(context);
+      _initialized = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +79,7 @@ class Daham extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             FormBuilderLocalizations.delegate,
           ],
-          home: state.login != true ? Login() : HomePage(),
+          home: state.login != true ? Login() : MainPage(),
           routes: {
             '/profileSetting': (context) => ProfileSetup(),
             '/sign': (context) => Login(),

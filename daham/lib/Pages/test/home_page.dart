@@ -1,4 +1,5 @@
-import 'package:daham/Appstate/appstate.dart';
+import 'package:daham/Provider/appstate.dart';
+import 'package:daham/Pages/User/profile_setup.dart';
 import 'package:daham/app_material.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,27 +9,32 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNav(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('HomePage'),
-            Consumer<AppState>(
-              builder: (context, value, _) {
-                return Column(
+    return Consumer<AppState>(
+      builder: (context, appState, _) {
+        return appState.newAccount == false
+            ? Scaffold(
+              bottomNavigationBar: BottomNav(),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextButton(onPressed: value.signOut, child: Text('LogOut')),
-                    Text('Login : ${value.login}'),
+                    Column(
+                      children: [
+                        TextButton(
+                          onPressed: appState.signOut,
+                          child: Text('LogOut'),
+                        ),
+                        Text('Login : ${appState.login}'),
+                      ],
+                    ),
+                    Text('HomePage'),
                   ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+                ),
+              ),
+            )
+            : ProfileSetup();
+      },
     );
   }
 }
