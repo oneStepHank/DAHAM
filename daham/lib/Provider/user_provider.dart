@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 class UserState extends ChangeNotifier {
   StreamSubscription? _userDocSub;
-  Map<String, dynamic>? userData;
+  Map<String, dynamic>? _userData;
+  get userData => _userData;
 
   void listenUserDoc(String uid) {
     _userDocSub?.cancel();
@@ -16,7 +17,7 @@ class UserState extends ChangeNotifier {
         .doc(uid)
         .snapshots()
         .listen((doc) {
-          userData = doc.data();
+          _userData = doc.data();
           notifyListeners();
         });
   }
@@ -24,7 +25,7 @@ class UserState extends ChangeNotifier {
   void clear() {
     _userDocSub?.cancel();
     _userDocSub = null;
-    userData = null;
+    _userData = null;
     notifyListeners();
   }
 
