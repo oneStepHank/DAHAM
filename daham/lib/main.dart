@@ -1,9 +1,8 @@
-import 'package:daham/Pages/HomePage/main_page.dart';
+import 'package:daham/Pages/HomePage/mainFrame.dart';
 import 'package:daham/Provider/appstate.dart';
 import 'package:daham/Pages/Group/group_list_page.dart';
 import 'package:daham/Pages/Login/login.dart';
 import 'package:daham/Pages/User/profile_setup.dart';
-import 'package:daham/Pages/test/home_page.dart';
 import 'package:daham/Provider/group_provider.dart';
 import 'package:daham/Provider/user_provider.dart';
 import 'package:daham/firebase_options.dart';
@@ -79,7 +78,7 @@ class _DahamState extends State<Daham> {
             GlobalCupertinoLocalizations.delegate,
             FormBuilderLocalizations.delegate,
           ],
-          home: state.login != true ? Login() : MainPage(),
+          home: state.login != true ? Login() : MainScaffold(),
           routes: {
             '/profileSetting': (context) => ProfileSetup(),
             '/sign': (context) => Login(),
