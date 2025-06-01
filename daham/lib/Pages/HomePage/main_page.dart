@@ -1,4 +1,4 @@
-import 'package:daham/app_material.dart';
+import 'package:daham/Data/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -128,137 +128,86 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // 상단 사용자 정보
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage('assets/user.png'),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text('사용자명', style: TextStyle(fontSize: 16)),
-                ],
-              ),
-            ),
-            // 달력
-            TableCalendar(
-              firstDay: DateTime.utc(2020, 1, 1),
-              lastDay: DateTime.utc(2030, 12, 31),
-              focusedDay: _focusedDay,
-              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-              onDaySelected: (selectedDay, focusedDay) {
-                setState(() {
-                  _selectedDay = selectedDay;
-                  _focusedDay = focusedDay;
-                });
-              },
-              calendarFormat: CalendarFormat.week,
-              headerVisible: false,
-            ),
-            // 퍼센트 인디케이터
-            CircularPercentIndicator(
-              radius: 60.0,
-              lineWidth: 12.0,
-              percent: completionRate,
-              center: Text(
-                "${(completionRate * 100).toStringAsFixed(0)}%",
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Column(
+        children: [
+          // 상단 사용자 정보
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  radius: 24,
+                  backgroundImage: AssetImage('assets/user.png'),
                 ),
-              ),
-              progressColor: Colors.yellow.shade600,
-              backgroundColor: Colors.yellow.shade100,
-              circularStrokeCap: CircularStrokeCap.round,
+                const SizedBox(width: 12),
+                const Text('사용자명', style: TextStyle(fontSize: 16)),
+              ],
             ),
-            const SizedBox(height: 16),
-            // 할 일 목록
-            Expanded(
-              child: ListView.builder(
-                itemCount: todos.length,
-                itemBuilder: (context, index) {
-                  final todo = todos[index];
-                  return CheckboxListTile(
-                    title: Text(
-                      todo.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    subtitle: Text(
-                      todo.subtitle,
-                      style: const TextStyle(fontSize: 13),
-                    ),
-                    value: todo.checked,
-                    onChanged: (value) {
-                      setState(() {
-                        todos[index] = TodoItemData(
-                          title: todo.title,
-                          subtitle: todo.subtitle,
-                          checked: value ?? false,
-                        );
-                      });
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddTodoDialog,
-        backgroundColor: Colors.white,
-        child: const Icon(Icons.add, color: Colors.blue),
-      ),
-      bottomNavigationBar: BottomNav(),
-    );
-  }
-}
-
-class TestNaV extends StatelessWidget {
-  const TestNaV({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.black54,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-        BottomNavigationBarItem(icon: Icon(Icons.groups), label: '그룹'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat_bubble_outline),
-          label: '채팅',
-        ),
-        BottomNavigationBarItem(
-          icon: CircleAvatar(
-            radius: 12,
-            backgroundImage: AssetImage('assets/user.png'),
           ),
-          label: 'MY',
-        ),
-      ],
+          // 달력
+          TableCalendar(
+            firstDay: DateTime.utc(2020, 1, 1),
+            lastDay: DateTime.utc(2030, 12, 31),
+            focusedDay: _focusedDay,
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+              });
+            },
+            calendarFormat: CalendarFormat.week,
+            headerVisible: false,
+          ),
+          // 퍼센트 인디케이터
+          CircularPercentIndicator(
+            radius: 60.0,
+            lineWidth: 12.0,
+            percent: completionRate,
+            center: Text(
+              "${(completionRate * 100).toStringAsFixed(0)}%",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            progressColor: Colors.yellow.shade600,
+            backgroundColor: Colors.yellow.shade100,
+            circularStrokeCap: CircularStrokeCap.round,
+          ),
+          const SizedBox(height: 16),
+          // 할 일 목록
+          Expanded(
+            child: ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                final todo = todos[index];
+                return CheckboxListTile(
+                  title: Text(
+                    todo.title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  subtitle: Text(
+                    todo.subtitle,
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                  value: todo.checked,
+                  onChanged: (value) {
+                    setState(() {
+                      todos[index] = TodoItemData(
+                        title: todo.title,
+                        subtitle: todo.subtitle,
+                        checked: value ?? false,
+                      );
+                    });
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
-}
-
-class TodoItemData {
-  final String title;
-  final String subtitle;
-  final bool checked;
-
-  TodoItemData({
-    required this.title,
-    required this.subtitle,
-    required this.checked,
-  });
 }
